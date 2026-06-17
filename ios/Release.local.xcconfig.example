@@ -1,0 +1,6 @@
+// Copy to Release.local.xcconfig (same folder). Gitignored — never commit.
+//
+// Team ID: Apple Developer → Membership → Team ID
+// Or Xcode → App target → Signing & Capabilities → Team (hover for ID)
+//
+DEVELOPMENT_TEAM = YOUR_TEAM_ID_HERE

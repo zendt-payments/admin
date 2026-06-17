@@ -1,0 +1,18 @@
+App/build
+App/Pods
+App/output
+App/App/public
+DerivedData
+xcuserdata
+
+# Local signing / release handoff (never commit)
+Release.local.xcconfig
+RELEASE-HANDOFF.local.txt
+*.ipa
+
+# Cordova plugins for Capacitor
+capacitor-cordova-ios-plugins
+
+# Generated Config files
+App/App/capacitor.config.json
+App/App/config.xml

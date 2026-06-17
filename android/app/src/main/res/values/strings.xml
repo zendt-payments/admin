@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Zendt</string>
+    <string name="title_activity_main">Zendt</string>
+    <string name="package_name">com.zendt.app</string>
+    <string name="server_client_id">17474762978-eal2odngaic1032aidf21off342q8522.apps.googleusercontent.com</string>
+</resources>

@@ -1,0 +1,396 @@
+{
+  "plans": [
+    {
+      "name": "Starter",
+      "price": "₹0/mo",
+      "description": "Best for testing and small volumes.",
+      "features": ["2 payment methods", "Email support", "3 team seats"]
+    },
+    {
+      "name": "Growth",
+      "price": "₹4,099/mo",
+      "description": "Preferred tier for scaling brands.",
+      "features": ["All payment rails", "Priority support", "Unlimited team seats"]
+    },
+    {
+    "name": "Growth",
+    "price": "₹12,499/mo",
+    "description": "Perfect for fast-scaling businesses.",
+    "features": [
+      "50,000 transactions",
+      "Priority settlements",
+      "Automation workflows",
+      "Advanced fraud monitoring"
+    ]
+  }
+  ],
+  "profileSettings": {
+    "initialAddress": {
+      "line1": "12, Gandhi Nagar",
+      "city": "New Delhi",
+      "postal": "110001",
+      "country": "India"
+    },
+    "addressFields": [
+      { "label": "Address line 1", "key": "line1" },
+      { "label": "City / Town", "key": "city" },
+      { "label": "Postal / Zip", "key": "postal" },
+      { "label": "Country", "key": "country" }
+    ],
+    "brandFields": [
+      { "label": "Name", "key": "name" },
+      { "label": "Email", "key": "email" }
+    ],
+    "initialProfileData": {
+      "name": "Arjun Sharma",
+      "email": "arjun.sharma@example.com"
+    }
+  },
+  "settingsToggles": [
+    { "key": "whatsapp_notifications", "label": "WhatsApp updates", "description": "Receive payment confirmations and account updates on WhatsApp." }
+  ],
+  "businessProfile": {
+    "addressFields": [{ "label": "Address line 1", "key": "line1" }],
+    "initialAddress": {
+      "line1": "12, Gandhi Nagar",
+      "city": "New Delhi",
+      "postal": "110001",
+      "country": "India"
+    },
+    "brandFields": [
+      { "label": "Brand name", "key": "brandName" },
+      { "label": "Email", "key": "email" },
+      { "label": "Mobile Number", "key": "phone" },
+      { "label": "Website", "key": "website" }
+    ],
+    "initialBrandData": {
+      "brandName": "Arjun Sharma",
+      "email": "arjun.sharma@example.com",
+      "phone": "+91 98765 43210",
+      "website": "arjunsharma.com"
+    }
+  },
+  "bankAccounts": [
+    {
+      "id": 1,
+      "bankName": "State Bank of India",
+      "currency": "INR",
+      "accountNumber": "09182994749032",
+      "status": "ACTIVE",
+      "isDefault": true,
+      "flag": "/india.png",
+      "logo": "/sbi.png"
+    },
+    {
+      "id": 2,
+      "bankName": "Axis Bank",
+      "currency": "INR",
+      "accountNumber": "09182994749032",
+      "status": "IN ACTIVE",
+      "isDefault": false,
+      "flag": "/india.png",
+      "logo": "/axis.png"
+    }
+  ],
+  "termsParagraphs": [
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+  ],
+  "profileHubItems": [
+    { "label": "Business profile", "to": "/dashboard/business-profile", "icon": "Briefcase" },
+    { "label": "Settings", "to": "/dashboard/settings", "icon": "Settings" },
+    { "label": "Bank accounts", "to": "/dashboard/bank-accounts", "icon": "Building2" },
+    { "label": "Verification / KYC", "to": "/dashboard/kyc", "icon": "ClipboardCheck" },
+    { "label": "Pricing", "to": "/dashboard/pricing", "icon": "Tag" },
+    { "label": "Help and Support", "to": "/dashboard/help", "icon": "LifeBuoy", "showArrow": true }
+  ],
+  "cards": [
+    {
+      "cardNumber": "1234 56** ****",
+      "cardHolder": "Arjun Sharma",
+      "brandLogo": "/assets/mastercard.png"
+    },
+    {
+      "cardNumber": "9876 54** ****",
+      "cardHolder": "Zynga",
+      "brandLogo": "/assets/visa.svg"
+    },
+    {
+      "cardNumber": "4455 11** ****",
+      "cardHolder": "Paper Studio",
+      "brandLogo": "/assets/amex.svg"
+    }
+  ],
+  "kycSteps": [
+    { "title": "Business documents", "detail": "Upload certificate of incorporation and proof of address." },
+    { "title": "Identity verification", "detail": "Capture a government issued ID for all beneficial owners." },
+    { "title": "Bank statement", "detail": "Share a PDF copy from the last 3 months to verify ownership." }
+  ],
+  "paymentSections": [
+    {
+      "title": "International payments",
+      "items": [
+        { "label": "Invoices", "to": "/dashboard/invoice-options" },
+        { "label": "Payment links", "to": "/dashboard/payment-links" }
+      ]
+    },
+    {
+      "title": "Domestic payments",
+      "items": [
+        { "label": "Invoices", "to": "/dashboard/invoice-options" },
+        { "label": "Payment links", "to": "/dashboard/payment-links" }
+      ]
+    }
+  ],
+  "clientOptions": {
+    "countries": ["United States", "India", "United Arab Emirates"],
+    "purposeCodes": ["Consulting", "Services", "Merchandise"]
+  },
+  "faqs": [
+    {
+      "question": "How do I generate payment links?",
+      "answer": "Head to Collect → Payment links. You can share branded URLs or embed buttons on your site."
+    },
+    {
+      "category": "PAYMENTS AND FEES",
+      "question": "What does Zendt charge?",
+      "answer": "UPI is free. Debit card 1.5%/1.9%. Credit card 2.2%–3.0%. International card 4% + live FX rate. GST at 18% charged additionally on all paid methods."
+    },
+    {
+      "category": "PAYMENTS AND FEES",
+      "question": "What currencies can my clients pay in?",
+      "answer": "Any currency supported by Visa or Mastercard including QAR, AED, SAR, OMR, BHD, KWD. Earnings settle in INR."
+    },
+    {
+      "category": "PAYMENTS AND FEES",
+      "question": "Can my client pay partially?",
+      "answer": "Yes. Payment link shows \"Partially paid\" status. Remaining balance is visible."
+    },
+    {
+      "category": "PAYOUTS AND SETTLEMENTS",
+      "question": "When do payments settle to my bank?",
+      "answer": "Settlement timing follows your payment provider’s schedule; many domestic INR settlements complete within a business day."
+    },
+    {
+      "category": "PAYOUTS AND SETTLEMENTS",
+      "question": "When does my money arrive?",
+      "answer": "Domestic UPI same day. Other domestic methods T+1. International T+3 working days."
+    },
+    {
+      "category": "PAYOUTS AND SETTLEMENTS",
+      "question": "Where does money go after a payment?",
+      "answer": "Funds land in your Zendt wallet. Withdraw to your linked bank account anytime."
+    },
+    {
+      "category": "PAYOUTS AND SETTLEMENTS",
+      "question": "How do I withdraw to my bank?",
+      "answer": "Go to wallet, tap Withdraw, enter amount. Reaches your bank within 1 business day."
+    },
+    {
+      "category": "KYC AND VERIFICATION",
+      "question": "Why do I need to complete KYC?",
+      "answer": "RBI regulations require identity verification to receive international payments. One-time process, under 5 minutes."
+    },
+    {
+      "category": "KYC AND VERIFICATION",
+      "question": "What documents do I need?",
+      "answer": "PAN card and bank account details. For professional verification, a work sample or client contract."
+    },
+    {
+      "category": "KYC AND VERIFICATION",
+      "question": "How long does KYC approval take?",
+      "answer": "Most accounts approved within 24 hours. WhatsApp notification sent on approval."
+    },
+    {
+      "category": "ACCOUNT AND SECURITY",
+      "question": "Can I change my linked bank account?",
+      "answer": "Yes. Go to Account, Bank accounts, add new account. Verification takes 1 business day."
+    },
+    {
+      "category": "ACCOUNT AND SECURITY",
+      "question": "Is my data safe with Zendt?",
+      "answer": "All data encrypted in transit and at rest. Bank-grade security. Information is never shared with third parties."
+    },
+    {
+      "category": "ACCOUNT AND SECURITY",
+      "question": "Where can I reach support?",
+      "answer": "Reach us on call, WhatsApp, or email hello@zendtpayments.com from the Help and Support screen."
+    }
+  ],
+  "transactions": [
+    { "id": 1, "name": "Ananya Rao", "amount": 450.0, "date": "12 Dec 2025" },
+    { "id": 2, "name": "Vikram Malhotra", "amount": 230.5, "date": "11 Dec 2025" },
+    { "id": 3, "name": "Meera Srinivasan", "amount": 1299.0, "date": "10 Dec 2025" },
+    { "id": 4, "name": "Rahul Verma", "amount": 350.0, "date": "09 Dec 2025" },
+    { "id": 5, "name": "Priya Singh", "amount": 649.0, "date": "08 Dec 2025" },
+    { "id": 6, "name": "Kabir Anand", "amount": 560.0, "date": "07 Dec 2025" },
+    { "id": 7, "name": "Sanya Kapoor", "amount": 299.0, "date": "06 Dec 2025" },
+    { "id": 8, "name": "Amit Patel", "amount": 899.0, "date": "05 Dec 2025" },
+    { "id": 9, "name": "Ishita Bose", "amount": 450.0, "date": "04 Dec 2025" },
+    { "id": 10, "name": "Sneha Gupta", "amount": 119.0, "date": "03 Dec 2025" },
+    { "id": 11, "name": "Rohan Dutta", "amount": 320.0, "date": "02 Dec 2025" },
+    { "id": 12, "name": "Nisha Chopra", "amount": 99.0, "date": "01 Dec 2025" }
+  ],
+  "paymentLinks": [
+    {
+      "id": "PLNK-1001",
+      "referenceId": "REF-1001",
+      "customer": { "name": "John Doe", "email": "john@example.com", "phone": "+1 202 555 0101" },
+      "amount": 500,
+      "status": "Created",
+      "createdOn": "2024-01-15"
+    },
+    {
+      "id": "PLNK-1002",
+      "referenceId": "REF-1002",
+      "customer": { "name": "Sarah Miller", "email": "sarah@example.com", "phone": "+1 202 555 0149" },
+      "amount": 1200,
+      "status": "Partially paid",
+      "createdOn": "2024-02-01"
+    },
+    {
+      "id": "PLNK-1003",
+      "referenceId": "REF-1003",
+      "customer": { "name": "Priya Sharma", "email": "priya@example.com", "phone": "+91 98765 43210" },
+      "amount": 750,
+      "status": "Paid",
+      "createdOn": "2024-02-20"
+    },
+    {
+      "id": "PLNK-1004",
+      "referenceId": "REF-1004",
+      "customer": { "name": "Luis Alberto", "email": "luis@example.com", "phone": "+971 52 555 9876" },
+      "amount": 230,
+      "status": "Cancelled",
+      "createdOn": "2023-12-10"
+    },
+    {
+      "id": "PLNK-1005",
+      "referenceId": "REF-1005",
+      "customer": { "name": "Emily Carter", "email": "emily@example.com", "phone": "+1 301 555 7000" },
+      "amount": 999,
+      "status": "Expired",
+      "createdOn": "2023-11-04"
+    },
+    {
+      "id": "PLNK-1006",
+      "referenceId": "REF-2001",
+      "customer": { "name": "Daniel Zhang", "email": "danielz@example.com", "phone": "+86 555 9090" },
+      "amount": 55,
+      "status": "Paid",
+      "createdOn": "2024-02-27"
+    },
+    {
+      "id": "PLNK-1007",
+      "referenceId": "REF-2002",
+      "customer": { "name": "Mia Johnson", "email": "mia@example.com", "phone": "+1 213 555 1200" },
+      "amount": 5000,
+      "status": "Paid",
+      "createdOn": "2023-10-15"
+    },
+    {
+      "id": "PLNK-1008",
+      "referenceId": "REF-2003",
+      "customer": { "name": "Alex Green", "email": "alexg@example.com", "phone": "+44 20 7777 1234" },
+      "amount": 40,
+      "status": "Created",
+      "createdOn": "2024-02-29"
+    },
+    {
+      "id": "PLNK-1009",
+      "referenceId": "REF-2004",
+      "customer": { "name": "Huda Ali", "email": "huda@example.com", "phone": "+971 54 442 2299" },
+      "amount": 185,
+      "status": "Cancelled",
+      "createdOn": "2023-09-12"
+    },
+    {
+      "id": "PLNK-1010",
+      "referenceId": "REF-2005",
+      "customer": { "name": "Jean Pierre", "email": "jeanp@example.fr", "phone": "+33 6 55 44 33 22" },
+      "amount": 310,
+      "status": "Partially paid",
+      "createdOn": "2024-02-10"
+    },
+    {
+      "id": "PLNK-1011",
+      "referenceId": "REF-3001",
+      "customer": { "name": "Mark Wood", "email": "mark@example.com", "phone": "+1 202 555 9981" },
+      "amount": 5,
+      "status": "Expired",
+      "createdOn": "2023-06-01"
+    },
+    {
+      "id": "PLNK-1012",
+      "referenceId": "REF-3002",
+      "customer": { "name": "Sofia Lin", "email": "sofia@example.com", "phone": "+886 987 123 444" },
+      "amount": 22000,
+      "status": "Paid",
+      "createdOn": "2024-01-02"
+    },
+    {
+      "id": "PLNK-1013",
+      "referenceId": "REF-3003",
+      "customer": { "name": "Michael Adams", "email": "madams@example.com", "phone": "+1 202 555 7781" },
+      "amount": 150,
+      "status": "Created",
+      "createdOn": "2024-02-28"
+    },
+    {
+      "id": "PLNK-1014",
+      "referenceId": "REF-3004",
+      "customer": { "name": "Helena Costa", "email": "helena@example.pt", "phone": "+351 911 555 100" },
+      "amount": 950,
+      "status": "Cancelled",
+      "createdOn": "2024-01-20"
+    },
+    {
+      "id": "PLNK-1015",
+      "referenceId": "REF-3005",
+      "customer": { "name": "Ivan Petrov", "email": "ivan@example.ru", "phone": "+7 495 555 90 90" },
+      "amount": 400,
+      "status": "Partially paid",
+      "createdOn": "2023-12-22"
+    }
+  ],
+  "invoiceBillFrom": {
+    "personal": {
+      "name": "Arjun Sharma",
+      "email": "arjun.sharma@example.com",
+      "phone": "+91 98765 43210",
+      "address": "12, Gandhi Nagar, New Delhi, 110001, India"
+    },
+    "brand": {
+      "name": "Zendt Technologies",
+      "email": "hello@zendt.com",
+      "phone": "+1 800 555 0100",
+      "address": "456 Innovation Drive, San Francisco, CA 94105, United States"
+    }
+  },
+  "invoiceClients": [
+    {
+      "id": 1,
+      "name": "Acme Corporation",
+      "email": "contact@acme.com",
+      "phone": "+1 555 123 4567",
+      "address": "789 Business Ave, New York, NY 10001, United States"
+    },
+    {
+      "id": 2,
+      "name": "Tech Solutions Inc",
+      "email": "info@techsolutions.com",
+      "phone": "+1 555 987 6543",
+      "address": "321 Tech Park, Seattle, WA 98101, United States"
+    },
+    {
+      "id": 3,
+      "name": "Global Enterprises",
+      "email": "admin@globalent.com",
+      "phone": "+1 555 456 7890",
+      "address": "555 Commerce Street, Chicago, IL 60601, United States"
+    }
+  ]
+  
+}

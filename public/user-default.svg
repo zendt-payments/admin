@@ -1,0 +1,13 @@
+<svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="36" height="36" rx="10" fill="url(#zendt-avatar-bg)" stroke="rgba(255,255,255,0.07)"/>
+  <g transform="translate(5.76 5.76) scale(1.02)" stroke="#E7E5E1" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <circle cx="12" cy="8.5" r="3.8"/>
+    <path d="M4.5 20c1.4-3.8 4.3-5.4 7.5-5.4s6.1 1.6 7.5 5.4"/>
+  </g>
+  <defs>
+    <linearGradient id="zendt-avatar-bg" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1D1B1A"/>
+      <stop offset="1" stop-color="#0D0C0E"/>
+    </linearGradient>
+  </defs>
+</svg>

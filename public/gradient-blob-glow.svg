@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 379 278" fill="none" aria-hidden="true">
+  <defs>
+    <filter
+      id="gradient-blob-blur"
+      x="-80%"
+      y="-80%"
+      width="260%"
+      height="260%"
+      filterUnits="objectBoundingBox"
+      color-interpolation-filters="sRGB"
+    >
+      <feGaussianBlur stdDeviation="32" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+      </feMerge>
+    </filter>
+    <radialGradient
+      id="gradient-blob-paint"
+      cx="0"
+      cy="0"
+      r="1"
+      gradientUnits="userSpaceOnUse"
+      gradientTransform="translate(91.8381 25.5398) rotate(139.561) scale(236.334 180.324)"
+    >
+      <stop stop-color="#FFAD7A" />
+      <stop offset="0.580821" stop-color="#5D689D" />
+      <stop offset="1" stop-color="#142337" />
+    </radialGradient>
+  </defs>
+  <path
+    filter="url(#gradient-blob-blur)"
+    d="M251.377 126.5C175.549 191.125 -23.4354 254.634 -88.0339 178.836C-152.632 103.039 -58.3827 -83.3622 17.4454 -147.987C93.2734 -212.611 207.112 -203.554 271.71 -127.757C336.309 -51.9591 327.205 61.8754 251.377 126.5Z"
+    fill="url(#gradient-blob-paint)"
+  />
+</svg>

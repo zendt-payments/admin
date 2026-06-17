@@ -1,0 +1,476 @@
+@import url("https://api.fontshare.com/v2/css?f[]=clash-display@200,300,400,500,600,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700&display=swap");
+@import "tailwindcss";
+
+/*
+ * Application typography scale (single source of truth).
+ *
+ * Zendt is a Capacitor web app, so iOS and Android render the same web fonts —
+ * one scale serves both. Sizes follow Apple HIG + Material guidance, with a
+ * 12px floor so nothing is unreadable on a phone. Use the semantic utilities
+ * (text-caption / text-body / text-callout / text-title / text-headline /
+ * text-display) instead of hardcoded text-[Npx] / text-xs values.
+ *
+ *   caption  12px  micro-labels, metadata, captions, eyebrows
+ *   body     14px  default body text, inputs, list rows, buttons
+ *   callout  16px  section titles, emphasized text
+ *   title    18px  page titles
+ *   headline 22px  auth / hero headings
+ *   display  28px  splash / large display text
+ *
+ * Line-height is intentionally left to inherit (`normal`) so this is a pure
+ * size swap and does not shift existing vertical rhythm.
+ */
+@theme {
+  --text-caption: 12px;
+  --text-body: 14px;
+  --text-callout: 16px;
+  --text-title: 18px;
+  --text-headline: 22px;
+  --text-display: 28px;
+}
+
+/* Recent transactions & available cards on dashboard home — Cairo */
+.zendt-dashboard-cairo {
+  font-family: Cairo, sans-serif;
+}
+
+/* Dashboard surfaces — Clash Display (matches :root; use where Cairo or other fonts must not apply) */
+.zendt-dashboard-clash {
+  font-family: "Clash Display Variable", "Clash Display", system-ui, sans-serif;
+}
+
+/* Dashboard FX strip title — explicit Clash (variable-capable upload uses “Clash Display” family on Fontshare) */
+.zendt-exchange-rate-heading {
+  font-family: "Clash Display Variable", "Clash Display", system-ui, sans-serif;
+}
+
+/* Exchange rate cards — uniform label / INR spacing on every tile */
+.zendt-fx-card-currency-label {
+  letter-spacing: 0.9em;
+}
+
+.zendt-fx-card-inr-suffix {
+  letter-spacing: 0.12em;
+}
+
+:root {
+  font-family: "Clash Display", sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+  /*
+   * Capacitor SystemBars injects --safe-area-inset-* on Android (WebView < 140 env() bug).
+   * iOS uses env() with viewport-fit=cover. Single vars for layout utilities.
+   */
+  --zendt-safe-top: var(--safe-area-inset-top, env(safe-area-inset-top, 0px));
+  --zendt-safe-right: var(--safe-area-inset-right, env(safe-area-inset-right, 0px));
+  --zendt-safe-bottom: 0px;
+  --zendt-safe-left: var(--safe-area-inset-left, env(safe-area-inset-left, 0px));
+}
+
+/* App chrome fills the notch/status-bar region; content uses pt-safe-* utilities. */
+html {
+  background-color: #141414;
+}
+
+body {
+  font-family: inherit;
+  font-style: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  background-color: #141414;
+  color: white;
+}
+
+/* Native App Styles - Prevent website-like behaviors */
+* {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+html {
+  /* Prevent pull-to-refresh */
+  overscroll-behavior-y: none;
+  overscroll-behavior-x: none;
+  /* Prevent bounce/elastic scrolling */
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  /* iPhone specific: Use full viewport height including safe areas */
+  height: 100vh;
+  height: -webkit-fill-available;
+}
+
+body {
+  user-select: none;
+  -webkit-user-select: none;
+  /* Prevent pull-to-refresh and overscroll */
+  overscroll-behavior: none;
+  overscroll-behavior-y: none;
+  overscroll-behavior-x: none;
+  /* Enable smooth scrolling within body */
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  /* Fill viewport */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* iPhone specific: Use full available height */
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+}
+
+#root {
+  /* Prevent overscroll on root */
+  overscroll-behavior: none;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  /* iPhone specific: Ensure content fits in viewport */
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+}
+
+/* Allow text selection in input fields */
+input,
+textarea {
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+/* File pickers: global * { -webkit-touch-callout: none } can break gallery on iOS/WebViews */
+input[type="file"] {
+  -webkit-touch-callout: default;
+  touch-action: manipulation;
+}
+
+/* Smooth scrolling on web only; Capacitor adds .native-app in native-preflight.ts */
+html {
+  scroll-behavior: smooth;
+}
+
+html.native-app {
+  scroll-behavior: auto;
+  touch-action: manipulation;
+}
+
+html.native-app body,
+html.native-app #root {
+  touch-action: manipulation;
+}
+
+/*
+ * Safe-area layout helpers (used across dashboard/auth).
+ * Background stays edge-to-edge on html/body; only interactive content is inset.
+ */
+@utility pt-safe {
+  padding-top: var(--zendt-safe-top);
+}
+
+@utility pt-safe-header {
+  padding-top: calc(3rem + var(--zendt-safe-top));
+}
+
+@utility pt-safe-nav {
+  padding-top: calc(2rem + var(--zendt-safe-top));
+}
+
+@utility pb-safe {
+  padding-bottom: var(--zendt-safe-bottom);
+}
+
+@utility pb-safe-12 {
+  padding-bottom: calc(3rem + var(--zendt-safe-bottom));
+}
+
+@utility bottom-safe-6 {
+  bottom: calc(1.5rem + var(--zendt-safe-bottom));
+}
+
+/** Dashboard mobile tab bar + home indicator (replaces pb-24 + safe bottom). */
+@utility pb-safe-tab {
+  padding-bottom: calc(6rem + var(--zendt-safe-bottom));
+}
+
+@utility pb-safe-nav {
+  padding-bottom: calc(6rem + var(--zendt-safe-bottom));
+}
+
+@utility top-safe-6 {
+  top: calc(1.5rem + var(--zendt-safe-top));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Decorative ambient blur for GradientBlob — inner wrapper only (not the SVG). */
+.my-blur-element {
+  -webkit-filter: blur(40px);
+  filter: blur(40px);
+  will-change: filter;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.my-blur-element-lg {
+  -webkit-filter: blur(64px);
+  filter: blur(64px);
+  will-change: filter;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.my-blur-element > svg,
+.my-blur-element-lg > svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/*
+ * Low-end device performance mode (set by native-preflight.ts from device
+ * heuristics). backdrop-filter blur is the single most expensive thing for an
+ * Android WebView — it forces re-rasterization of everything behind it on every
+ * repaint (including each keystroke/caret blink), which is what makes typing and
+ * navigation feel laggy on weaker hardware. Here we neutralize blurs and soften
+ * heavy custom shadows. High-end devices never get this class, so they are
+ * visually unchanged.
+ */
+html.perf-lite [class*="backdrop-blur"] {
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+html.perf-lite [class*="blur-"]:not([class*="backdrop-"]) {
+  filter: none !important;
+}
+html.perf-lite .my-blur-element,
+html.perf-lite .my-blur-element-lg {
+  -webkit-filter: none !important;
+  filter: none !important;
+}
+html.perf-lite [class*="shadow-["] {
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Hide scrollbar but keep functionality */
+::-webkit-scrollbar {
+  display: none;
+}
+
+* {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* iPhone specific: Prevent content from being pushed down by status bar */
+@supports (-webkit-touch-callout: none) {
+  /* This targets iOS Safari specifically */
+  body {
+    height: 100vh;
+    height: -webkit-fill-available;
+  }
+
+  #root {
+    height: 100vh;
+    height: -webkit-fill-available;
+  }
+}
+
+/*
+ * Premium press feedback for PressableButton (ripple=true).
+ *
+ * Layered effects:
+ *   1. ::after radial glow expands from the press point on :active.
+ *   2. ::before subtle inner highlight rim brightens on hover (web only).
+ *   3. Both pseudo-elements are pointer-events:none so they never block clicks.
+ *
+ * Notes:
+ *   - position: relative is forced so absolute children land inside the button.
+ *   - overflow: hidden contains the expanding ripple to button bounds.
+ *   - transform: translateZ(0) promotes to its own GPU layer for crisp rendering.
+ */
+.btn-ripple {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  transform: translateZ(0);
+}
+
+.btn-ripple::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.28) 0%,
+    rgba(255, 255, 255, 0.08) 35%,
+    transparent 70%
+  );
+  opacity: 0;
+  transform: scale(0.4);
+  transition:
+    opacity 360ms cubic-bezier(0.2, 0, 0, 1),
+    transform 420ms cubic-bezier(0.2, 0, 0, 1);
+  z-index: 0;
+}
+
+.btn-ripple:active::after {
+  opacity: 1;
+  transform: scale(1);
+  transition-duration: 80ms, 120ms;
+}
+
+.btn-ripple::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 60%);
+  opacity: 0;
+  transition: opacity 220ms cubic-bezier(0.2, 0, 0, 1);
+  z-index: 0;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn-ripple:hover::before {
+    opacity: 1;
+  }
+}
+
+/* Make sure button content sits above the pseudo-element ripple. */
+.btn-ripple > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Honor accessibility preference. */
+@media (prefers-reduced-motion: reduce) {
+  .btn-ripple::after,
+  .btn-ripple::before {
+    transition: none;
+  }
+}
+
+/* Shared form controls — padded surfaces for dashboard/KYC; auth uses underline `.zendt-input-auth`. */
+@layer components {
+  .zendt-input-auth {
+    @apply w-full bg-transparent border-b border-gray-500 text-white outline-none py-3 px-2 placeholder:text-white/35 focus:border-gray-300;
+  }
+  .zendt-input-surface {
+    @apply w-full rounded-[11px] bg-[#1E1E1E] px-4 py-3 text-white placeholder:text-white/40 focus:outline-none;
+  }
+  .zendt-input-surface-kyc {
+    @apply w-full rounded-[11px] bg-[#2E2E2E] px-4 py-3 text-white placeholder:text-white/40 focus:outline-none;
+  }
+  .zendt-input-surface-compact {
+    @apply rounded-[11px] bg-[#1E1E1E] px-3 py-3 text-white placeholder:text-white/40 focus:outline-none;
+  }
+  .zendt-input-surface-10 {
+    @apply w-full rounded-[10px] bg-[#1E1E1E] px-4 py-3 text-white placeholder:text-white/40 focus:outline-none;
+  }
+  .zendt-textarea-surface {
+    @apply w-full rounded-[11px] bg-[#1E1E1E] px-4 py-3 text-white placeholder:text-white/40 focus:outline-none;
+  }
+  .zendt-input-glass {
+    @apply w-full rounded-2xl bg-white/5 border border-white/10 px-4 py-3 text-body text-white outline-none placeholder:text-white/35 focus:border-white/25;
+  }
+  /** Sheet / modal fields on darker surface */
+  .zendt-input-surface-modal {
+    @apply w-full rounded-[14px] bg-[#2E2E2E] px-4 py-3 text-white placeholder:text-white/40 focus:outline-none;
+  }
+  /** Bordered dashboard fields (experience section, etc.) */
+  .zendt-input-surface-card {
+    @apply w-full rounded-[10px] bg-[#1E1E1E] border border-white/10 px-3 py-3 text-body text-white placeholder:text-white/30 focus:outline-none;
+  }
+}
+
+/* Padded surface phone field — matches `.zendt-input-surface` / `.zendt-input-surface-10` */
+.phone-input-surface {
+  @apply w-full rounded-[11px] bg-[#1E1E1E] flex items-center overflow-visible;
+}
+.phone-input-surface-10 {
+  @apply w-full rounded-[10px] bg-[#1E1E1E] flex items-center overflow-visible;
+}
+.phone-input-surface .react-international-phone-input-container,
+.phone-input-surface-10 .react-international-phone-input-container {
+  width: 100%;
+}
+.phone-input-surface .react-international-phone-country-selector-button,
+.phone-input-surface .react-international-phone-input,
+.phone-input-surface .react-international-phone-dial-code-preview,
+.phone-input-surface-10 .react-international-phone-country-selector-button,
+.phone-input-surface-10 .react-international-phone-input,
+.phone-input-surface-10 .react-international-phone-dial-code-preview {
+  border: none !important;
+  box-shadow: none !important;
+}
+.phone-input-surface .react-international-phone-input::placeholder,
+.phone-input-surface-10 .react-international-phone-input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* Business details / forms: underline only — library ships full box borders */
+.phone-input-dark .react-international-phone-country-selector-button,
+.phone-input-dark .react-international-phone-input {
+  border: none !important;
+}
+.phone-input-dark .react-international-phone-dial-code-preview {
+  border: none !important;
+}
+.phone-input-dark .react-international-phone-country-selector-dropdown,
+.phone-input-surface .react-international-phone-country-selector-dropdown,
+.phone-input-surface-10 .react-international-phone-country-selector-dropdown {
+  background-color: #1a1a1a !important;
+  opacity: 1 !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 10px !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5) !important;
+  z-index: 50 !important;
+}
+.phone-input-dark .react-international-phone-country-selector-dropdown__list-item,
+.phone-input-surface .react-international-phone-country-selector-dropdown__list-item,
+.phone-input-surface-10 .react-international-phone-country-selector-dropdown__list-item {
+  background-color: #1a1a1a !important;
+  color: white !important;
+}
+.phone-input-dark .react-international-phone-country-selector-dropdown__list-item:hover,
+.phone-input-surface .react-international-phone-country-selector-dropdown__list-item:hover,
+.phone-input-surface-10 .react-international-phone-country-selector-dropdown__list-item:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+.phone-input-dark .react-international-phone-country-selector-dropdown__list-item--selected,
+.phone-input-surface .react-international-phone-country-selector-dropdown__list-item--selected,
+.phone-input-surface-10 .react-international-phone-country-selector-dropdown__list-item--selected {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+}
+.phone-input-dark .react-international-phone-country-selector-dropdown__list-item-country-name,
+.phone-input-dark .react-international-phone-country-selector-dropdown__list-item-dial-code,
+.phone-input-surface .react-international-phone-country-selector-dropdown__list-item-country-name,
+.phone-input-surface .react-international-phone-country-selector-dropdown__list-item-dial-code,
+.phone-input-surface-10 .react-international-phone-country-selector-dropdown__list-item-country-name,
+.phone-input-surface-10 .react-international-phone-country-selector-dropdown__list-item-dial-code {
+  color: white !important;
+}
+.phone-input-dark .react-international-phone-country-selector-dropdown__list-item-dial-code,
+.phone-input-surface .react-international-phone-country-selector-dropdown__list-item-dial-code,
+.phone-input-surface-10 .react-international-phone-country-selector-dropdown__list-item-dial-code {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+.phone-input-dark .react-international-phone-country-selector-dropdown__search,
+.phone-input-surface .react-international-phone-country-selector-dropdown__search,
+.phone-input-surface-10 .react-international-phone-country-selector-dropdown__search {
+  background-color: #1a1a1a !important;
+  color: white !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
