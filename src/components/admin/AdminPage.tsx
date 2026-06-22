@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link, Navigate, useSearchParams } from "react-router-dom";
-import { ClipboardCheck, Database, Settings, Wallet, Users, ArrowLeftRight, Link2, FileText } from "lucide-react";
 import { useAuth } from "../../context/AuthContext";
 import { isAdmin } from "../../services/auth";
 import PageContainer from "../dashboard/PageContainer";
 import { DashboardPageTitle } from "../dashboard/DashboardTitles";
 import AdminApprovalsSection from "./AdminApprovalsSection";
+import AdminAnalyticsSection from "./AdminAnalyticsSection";
 import AdminDataSection from "./AdminDataSection";
 import AdminSettingsSection from "./AdminSettingsSection";
 import AdminWithdrawalsSection from "./AdminWithdrawalsSection";
@@ -15,15 +15,16 @@ import AdminPaymentLinksSection from "./AdminPaymentLinksSection";
 import AdminInvoicesSection from "./AdminInvoicesSection";
 import { PageHeaderSkeleton } from "../shared/skeletons/DashboardSkeletons";
 import ListRowsSkeleton from "../shared/skeletons/ListRowsSkeleton";
+import { ClipboardCheck, Database, Settings, Wallet, Users, ArrowLeftRight, Link2, FileText, BarChart3 } from "lucide-react";
 
-type Tab = "approvals" | "withdrawals" | "users" | "transactions" | "paymentlinks" | "invoices" | "data" | "settings";
+type Tab = "approvals" | "analytics" | "withdrawals" | "users" | "transactions" | "paymentlinks" | "invoices" | "data" | "settings";
 
 export default function AdminPage() {
   const { logout, isAuthenticated, isLoading } = useAuth();
   const [searchParams, setSearchParams] = useSearchParams();
   const initialTab = searchParams.get("tab") as Tab | null;
   const [tab, setTab] = useState<Tab>(
-    (["approvals","withdrawals","users","transactions","paymentlinks","invoices","data","settings"] as Tab[]).includes(initialTab as Tab)
+    (["approvals","analytics","withdrawals","users","transactions","paymentlinks","invoices","data","settings"] as Tab[]).includes(initialTab as Tab)
       ? (initialTab as Tab)
       : "approvals"
   );
@@ -69,6 +70,7 @@ export default function AdminPage() {
 
   const tabs: { id: Tab; label: string; icon: typeof ClipboardCheck }[] = [
     { id: "approvals", label: "Approvals", icon: ClipboardCheck },
+    { id: "analytics", label: "Analytics", icon: BarChart3 },
     { id: "withdrawals", label: "Withdrawals", icon: Wallet },
     { id: "users", label: "Users", icon: Users },
     { id: "transactions", label: "Transactions", icon: ArrowLeftRight },
@@ -80,8 +82,8 @@ export default function AdminPage() {
 
   return (
     <PageContainer className="text-white pb-16 min-h-screen max-w-none w-full">
-      <header className="sticky top-0 z-20 bg-[#141414]/95 backdrop-blur border-b border-white/10 px-4 sm:px-6 xl:px-8 pt-8 pt-safe pb-3">
-        <div className="max-w-6xl xl:max-w-7xl 2xl:max-w-[90rem] mx-auto flex flex-wrap items-center justify-between gap-3">
+      <header className="sticky top-0 z-20 bg-[#141414]/95 backdrop-blur border-b border-white/10 px-3 sm:px-4 pt-20 pt-safe pb-3">
+        <div className="w-full flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-3 min-w-0">
             <img src="/z-logo-nobg.png" alt="Zendt" className="h-6 w-6 object-contain shrink-0 md:h-14 md:w-14" />
             <DashboardPageTitle>Zendt Admin</DashboardPageTitle>
@@ -92,7 +94,7 @@ export default function AdminPage() {
             </button>
           </div>
         </div>
-        <nav className="max-w-6xl xl:max-w-7xl 2xl:max-w-[90rem] mx-auto flex gap-1 mt-4 overflow-x-auto pb-1">
+        <nav className="w-full flex gap-1 mt-4 overflow-x-auto pb-1">
           {tabs.map(({ id, label, icon: Icon }) => (
             <button
               key={id}
@@ -115,8 +117,9 @@ export default function AdminPage() {
         </nav>
       </header>
 
-      <main className="max-w-6xl xl:max-w-7xl 2xl:max-w-[90rem] mx-auto px-4 sm:px-6 xl:px-8 mt-6 space-y-6 xl:space-y-8">
+      <main className="w-full px-3 sm:px-4 mt-6 space-y-6 xl:space-y-8">
         {tab === "approvals" && <AdminApprovalsSection />}
+        {tab === "analytics" && <AdminAnalyticsSection />}
         {tab === "withdrawals" && <AdminWithdrawalsSection />}
         {tab === "users" && <AdminUsersSection />}
         {tab === "transactions" && <AdminTransactionsSection />}

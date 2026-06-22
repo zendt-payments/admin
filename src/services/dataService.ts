@@ -600,6 +600,43 @@ getAdminSignedUrl: (key: string) =>
   confirmAdminAvatar: (s3_key: string) =>
     post<{ ok: boolean; avatar_url: string; avatar_s3_key: string }>("/admin/me/avatar", { s3_key }),
 
+  getAdminAnalyticsOverview: (opts: {
+    range: 7 | 30 | 90;
+    topPeriod: "month" | "all";
+    compare: "calendar" | "rolling";
+  }) =>
+    get<{
+      kpis: {
+        total_signups: { value: number; change_pct?: number };
+        active_users: { value: number; change_pct?: number };
+        gmv_this_period: { value: number; change_pct?: number };
+        gmv_total: { value: number };
+      };
+      user_growth: Array<{ date: string; signups: number }>;
+      gmv_series: Array<{ date: string; amount: number }>;
+      kyc_funnel: {
+        signed_up: number;
+        kyc_started: number;
+        proof_submitted: number;
+        active: number;
+      };
+      top_users: Array<{
+        cognito_id: string;
+        full_name: string;
+        email: string;
+        gmv: number;
+        txn_count: number;
+      }>;
+      conversion: {
+        signups_with_first_txn: number;
+        total_signups: number;
+        pct: number;
+      };
+      meta: { range: number; topPeriod: string; compare: string };
+    }>(
+      `/admin/analytics/overview?range=${opts.range}&topPeriod=${opts.topPeriod}&compare=${opts.compare}`
+    ),
+
   getAdminDataSummary: () => get<{ counts: Record<string, number> }>("/admin/data/summary"),
 
   getAdminDataCollection: (params: {

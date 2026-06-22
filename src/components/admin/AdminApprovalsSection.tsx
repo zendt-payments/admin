@@ -148,7 +148,12 @@ export default function AdminApprovalsSection() {
   };
 
   const files =
-    (detail?.proof_files as Array<{
+    ((detail?.proof as Record<string, unknown>)?.files as Array<{
+      view_url?: string | null;
+      original_name?: string;
+      kind?: string;
+      s3_key?: string;
+    }>) || (detail?.proof_files as Array<{
       view_url?: string | null;
       original_name?: string;
       kind?: string;
@@ -221,22 +226,58 @@ export default function AdminApprovalsSection() {
             <>
               {/* User info */}
               <div className="text-body space-y-1.5">
-                <p>
-                  <span className="text-white/50">Name:</span> {String(detail.full_name || "")}
+                <p className="flex items-center gap-2 flex-wrap">
+                  <span className="text-white/50">Name:</span>
+                  <span>{String(detail.full_name || "")}</span>
+                  {detail.full_name ? (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        void navigator.clipboard.writeText(String(detail.full_name));
+                        showSuccess("Name copied");
+                      }}
+                      className="text-caption text-white/40 hover:text-white/80 underline-offset-2 hover:underline"
+                    >
+                      Copy
+                    </button>
+                  ) : null}
                 </p>
-                <p>
-                  <span className="text-white/50">Email:</span> {String(detail.email || "")}
+                <p className="flex items-center gap-2 flex-wrap">
+                  <span className="text-white/50">Email:</span>
+                  <span>{String(detail.email || "")}</span>
+                  {detail.email ? (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        void navigator.clipboard.writeText(String(detail.email));
+                        showSuccess("Email copied");
+                      }}
+                      className="text-caption text-white/40 hover:text-white/80 underline-offset-2 hover:underline"
+                    >
+                      Copy
+                    </button>
+                  ) : null}
                 </p>
                 <p>
                   <span className="text-white/50">Status:</span>{" "}
                   <span className="text-white/80">{String(detail.kyc_status || "")}</span>
                 </p>
                 {detail.sub_account_id ? (
-                  <p>
-                    <span className="text-white/50">Sub Account:</span>{" "}
+                  <p className="flex items-center gap-2 flex-wrap">
+                    <span className="text-white/50">Sub Account:</span>
                     <span className="font-mono text-caption text-emerald-400">
                       {String(detail.sub_account_id)}
                     </span>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        void navigator.clipboard.writeText(String(detail.sub_account_id));
+                        showSuccess("Sub Account ID copied");
+                      }}
+                      className="text-caption text-white/40 hover:text-white/80 underline-offset-2 hover:underline"
+                    >
+                      Copy
+                    </button>
                   </p>
                 ) : null}
                 <p>

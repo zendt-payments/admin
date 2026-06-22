@@ -60,6 +60,7 @@
     "react-international-phone": "^4.8.0",
     "react-router-dom": "^7.9.6",
     "react-select": "^5.10.2",
+    "recharts": "3.8.1",
     "swiper": "^12.1.4"
   },
   "devDependencies": {
